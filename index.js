@@ -1,7 +1,6 @@
 const express = require('express')
 const { default: mongoose } = require('mongoose')
-const helmet = require('helmet')
-const morgan = require('morgan')
+const cors = require('cors')
 const dotenv = require('dotenv')
 const usersController = require('./controller/usersController')
 const authController = require('./controller/authController')
@@ -18,7 +17,7 @@ mongoose
 //middleware
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-
+app.use(cors())
 
 
 app.use('/moi', (req, res) => {

@@ -41,9 +41,13 @@ usersController.delete('/:id', async(req, res) => {
     }
 })
 //get user
-usersController.get('/:id', async(req, res) => {
+usersController.get('/', async(req, res) => {
+    const userId = req.query.userId;
+    const username = req.query.usermane;
         try {
-            const user = await User.findById(req.params.id)
+            const user = userId
+            ? await User.findById(userId)
+            : await User.findOne({username: username})
             const {password, updatedAt, ...others} = user._doc
             res.status(200).json(others)
         } catch (err) {
